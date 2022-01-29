@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "IMD",
+    "slug": "IMD",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "IMD"
+}
