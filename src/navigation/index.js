@@ -4,11 +4,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screen/HomeScreen";
 import AboutScreen from "../screen/AboutScreen";
 import JadwalDakwahScreen from "../screen/JadwalDakwahScreen";
+import KajianUstadzScreen from "../screen/KajianUstadzScreen";
+import SubmitRequestScreen from "../screen/SubmitRequestScreen";
 import AddDakwahBtn from "../components/SmallComponents/AddDakwahBtn";
 import NotificationScreen from "../test/NotificationScreen";
 import InputScreen from "../test/InputScreen";
 import TodoScreen from "../test/TodoScreen";
 import MasjidProfileScreen from "../screen/MasjidProfileScreen";
+import UstadzRequestScreen from "../screen/UstadzRequestScreen";
+import ChangePasswordScreen from "../screen/ChangePasswordScreen";
+import UstadzProfileScreen from "../screen/UstadzProfileScreen";
 //import material community icons
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 //import search-bar from react-native-elements
@@ -17,10 +22,10 @@ import * as Updates from "expo-updates";
 import { createStackNavigator } from "@react-navigation/stack";
 import PostDakwahScreen from "../screen/PostDakwahScreen";
 
-import { Context as KajianContext } from "../context/KajianContext";
-import { Context as UstadzContext } from "../context/UstadzContext";
-import { Context as MasjidContext } from "../context/MasjidContext";
-import Spinner from "../components/Spinner";
+// import { Context as KajianContext } from "../context/KajianContext";
+// import { Context as UstadzContext } from "../context/UstadzContext";
+// import { Context as MasjidContext } from "../context/MasjidContext";
+// import Spinner from "../components/Spinner";
 
 const Stack = createStackNavigator();
 
@@ -28,7 +33,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator initialRouteName="KajianMasjid">
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -45,10 +50,10 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Kajian"
+        name="KajianMasjid"
         component={JadwalDakwahScreen}
         options={{
-          headerTitle: "Jadwal Dakwah",
+          headerTitle: "Jadwal Kajian",
           headerStyle: {
             backgroundColor: "#2F80ED",
           },
@@ -56,7 +61,7 @@ function MyTabs() {
             fontWeight: "bold",
             color: "#fff",
           },
-          tabBarLabel: "Kajian",
+          tabBarLabel: "Kajian Masjid",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="calendar-text-outline"
@@ -67,9 +72,30 @@ function MyTabs() {
           headerRight: () => <AddDakwahBtn></AddDakwahBtn>,
         }}
       />
-
       <Tab.Screen
-        name="Profile"
+        name="KajianUstadz"
+        component={KajianUstadzScreen}
+        options={{
+          headerTitle: "Kajian",
+          headerStyle: {
+            backgroundColor: "#2F80ED",
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            color: "#fff",
+          },
+          tabBarLabel: "Kajian Ustadz",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="calendar-text-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfileMasjiid"
         component={MasjidProfileScreen}
         options={{
           headerStyle: {
@@ -79,7 +105,24 @@ function MyTabs() {
             fontWeight: "bold",
             color: "#fff",
           },
-          tabBarLabel: "Profile",
+          tabBarLabel: "Profile Masjid",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfileUstadz"
+        component={UstadzProfileScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#2F80ED",
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            color: "#fff",
+          },
+          tabBarLabel: "Profile Ustadz",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
@@ -97,9 +140,9 @@ const StacksRoute = () => {
   }, []);
 
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="HomeTab">
       <Stack.Screen
-        name="Home"
+        name="HomeTab"
         component={MyTabs}
         options={{ headerShown: false }}
       />
@@ -107,6 +150,21 @@ const StacksRoute = () => {
         name="PostDakwah"
         component={PostDakwahScreen}
         options={{ headerTitle: "Buat Jadwal Dakwah" }}
+      />
+      <Stack.Screen
+        name="UstadzRequest"
+        component={UstadzRequestScreen}
+        options={{ headerTitle: "Permintaan Ustadz" }}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePasswordScreen}
+        options={{ headerTitle: "Update Password" }}
+      />
+      <Stack.Screen
+        name="SubmitRequest"
+        component={SubmitRequestScreen}
+        options={{ headerTitle: "Pengajuan Pendakwah" }}
       />
     </Stack.Navigator>
   );

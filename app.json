@@ -3,9 +3,27 @@
     "name": "IMD",
     "slug": "IMD",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  },
-  "name": "IMD"
+    "scheme": "imdapp",
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.slicez11.IMD",
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true,
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyBW-Nha-3dmKrcN8lmBv1HGofUpQNA37iw"
+        }
+      }
+    },
+    "userInterfaceStyle": "automatic",
+    "icon": "./assets/logo.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff"
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
+    }
+  }
 }

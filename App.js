@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import StacksRoute from "./src/navigation";
+import { Provider as KajianProvider } from "./src/context/KajianContext";
+import { Provider as UstadzProvider } from "./src/context/UstadzContext";
+import { Provider as MasjidProvider } from "./src/context/MasjidContext";
 
-export default function App() {
+// import InputScreen from "./src/screens/InputScreen";
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <UstadzProvider>
+      <MasjidProvider>
+        <KajianProvider>
+          <NavigationContainer>
+            <StacksRoute></StacksRoute>
+          </NavigationContainer>
+        </KajianProvider>
+      </MasjidProvider>
+    </UstadzProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "569911293360",
+    "project_id": "imd-app-78bb5",
+    "storage_bucket": "imd-app-78bb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569911293360:android:965a9ca97a2128ada2d275",
+        "android_client_info": {
+          "package_name": "com.slicez11.IMD"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569911293360-ounc0mq175plmr3du7c2nshr7ovvg6ca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.slicez11.IMD",
+            "certificate_hash": "6a8f7cd3f5591a444a471262cac4018a4ffe1d4f"
+          }
+        },
+        {
+          "client_id": "569911293360-6orft0jvrtpb2j9u56o41dv5roi52sae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW-Nha-3dmKrcN8lmBv1HGofUpQNA37iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569911293360-6orft0jvrtpb2j9u56o41dv5roi52sae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
