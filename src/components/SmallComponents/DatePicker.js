@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 
-import { TextInput } from "react-native-paper";
-import { View, TextInput as Ti } from "react-native";
+import {
+  View,
+  TextInput as Ti,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import styles from "../../style/global";
 import Moment from "moment";
-import { Feather, Entypo } from "@expo/vector-icons";
-const DatePicker = (props) => {
-  const [date, setDate] = useState(
-    Moment(props.date).format("DD-MMM-yyyy HH:mm")
-  );
+import InputText from "../Forms/InputForms/InputText";
+
+const DatePicker = ({ date, setDate, ...otherProps }) => {
+  const [dates, setDates] = useState(Moment(date).format("DD-MMM-yyyy HH:mm"));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     setShow(Platform.OS === "ios");
     if (selectedDate !== undefined) {
-      const currentDate = selectedDate || date;
-      props.setDate(currentDate);
-      setDate(Moment(currentDate).format("DD-MMM-yyyy HH:mm"));
+      const currentDate = selectedDate || dates;
+      setDate(currentDate);
+      setDates(Moment(currentDate).format("DD-MMM-yyyy HH:mm"));
       if (mode == "date") {
         showMode("time");
       }
@@ -31,24 +33,26 @@ const DatePicker = (props) => {
   };
 
   const openDatePicker = () => {
+    //console.log("oke");
     showMode("date");
   };
 
   return (
     <>
-      <TextInput
-        label="Tanggal Kajian"
-        value={date}
-        //  onChange={handleChange}
-        onTouchEnd={openDatePicker}
-        mode="outlined"
-        style={styles.input}
-        right={<TextInput.Icon name="calendar-month" />}
-      />
+      <TouchableWithoutFeedback onPress={openDatePicker}>
+        <View>
+          <InputText
+            icon="calendar-alt"
+            placeholdertxt="DD/MM/YYYY HH:MM"
+            value={dates}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={props.date}
+          value={date}
           mode={mode}
           is24Hour={true}
           display="default"

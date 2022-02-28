@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from "react";
 //import react native
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { TextInput, Button } from "react-native-paper";
-import DatePicker from "./SmallComponents/DatePicker";
-import styles from "../style/global";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+//import { Button } from "react-native-paper";
+
 import CheckBox from "./SmallComponents/CheckBox";
 import RadioButton from "./SmallComponents/RadioButton";
 import DropDown from "./SmallComponents/DropDown";
 import Modal from "./SmallComponents/Modal";
 import Card from "../components/SmallComponents/Card";
+
+import Screen from "./SmallComponents/Screen";
+import AppInputText from "./Forms/AppForms/AppInputText";
+import AppInputCalendarText from "./Forms/AppForms/AppInputCalendarText";
+import AppPickerText from "./Forms/AppForms/AppPickerText";
+import Button from "./SmallComponents/Button";
+
+import colors from "../style/colors";
+import AppRadioButton from "./Forms/AppForms/AppRadioButton";
 
 const DakwahForm = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,11 +33,6 @@ const DakwahForm = (props) => {
     thematic: "",
     sylabus: "",
   });
-  // const [test, setTest] = useState();
-
-  // useEffect(() => {
-  //   console.log(test);
-  // }, [test]);
 
   const handleChange = (name, text) => {
     setState({
@@ -39,13 +48,6 @@ const DakwahForm = (props) => {
     e.preventDefault();
     console.log(state);
     setModalVisible(true);
-    // props.onSubmit(state);
-    // setState({
-    //   title: "",
-    //   date: new Date(),
-    //   description: "",
-    //   thematic: "",
-    // });
   };
   const thematic = [
     "tematik1",
@@ -64,50 +66,59 @@ const DakwahForm = (props) => {
   };
   return (
     <>
-      <View style={styles.container}>
-        {/* create button save and cancel */}
-        <View style={styles.buttonContainer}>
-          <Button icon="check" mode="contained" onPress={handleSubmit}>
-            Simpan
-          </Button>
-          <Button icon="cancel" mode="outlined">
-            Batal
-          </Button>
+      <Screen style={styles.container}>
+        <ScrollView>
+          <View style={styles.formcontainer}>
+            <AppInputCalendarText
+              title="Tanggal & Waktu"
+              date={state.date}
+              setDate={(value) =>
+                setState({
+                  ...state,
+                  date: value,
+                })
+              }
+            ></AppInputCalendarText>
+
+            <AppRadioButton
+              title="Tipe Kajian"
+              data={tipe_kajian}
+              handleChange={(text) => handleChange("tipe_kajian", text)}
+            />
+
+            <AppPickerText
+              title="Tema Kajian"
+              data={thematic}
+              handleChange={(text) => handleChange("thematic", text)}
+            />
+
+            <AppPickerText
+              title="Silabus"
+              data={sylabus}
+              handleChange={(text) => handleChange("sylabus", text)}
+            />
+
+            <AppInputText
+              title="Judul Materi"
+              placeholdertxt="Judul Kajian"
+              value={state.title}
+              onChangeText={(text) => handleChange("title", text)}
+              multiline={true}
+            />
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Post"
+                icon="check-circle"
+                onPress={handleSubmit}
+                width="35%"
+              />
+            </View>
+          </View>
+        </ScrollView>
+
+        <View style={styles.masjidcontainer}>
+          <Card title="Nama Masjid" data={MasjidProfile} />
         </View>
-        <DatePicker
-          date={state.date}
-          setDate={(value) =>
-            setState({
-              ...state,
-              date: value,
-            })
-          }
-        ></DatePicker>
-        <Text style={styles.title}>Tipe Kajian</Text>
-
-        <RadioButton
-          data={tipe_kajian}
-          handleChange={(text) => handleChange("tipe_kajian", text)}
-        ></RadioButton>
-        <Text style={styles.title}>Tema Kajian</Text>
-        <DropDown
-          data={thematic}
-          handleChange={(text) => handleChange("thematic", text)}
-        ></DropDown>
-        <Text style={styles.title}>Sylabus</Text>
-        <DropDown
-          data={sylabus}
-          handleChange={(text) => handleChange("sylabus", text)}
-        ></DropDown>
-        <TextInput
-          label="Judul Materi"
-          value={state.title}
-          onChangeText={(text) => handleChange("title", text)}
-          mode="outlined"
-          style={styles.input}
-        />
-
-        <Card title="Nama Masjid" data={MasjidProfile} />
 
         <Modal
           visible={modalVisible}
@@ -115,10 +126,27 @@ const DakwahForm = (props) => {
           data={{ title: "Tersimpan", message: "" }}
           style={{ backgroundColor: "#27AE60" }}
         ></Modal>
-        {/* <CheckBox data={thematic} handleChange={handleChangeThematic} /> */}
-      </View>
+      </Screen>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10,
+  },
+  buttonContainer: {
+    width: "100%",
+    alignItems: "center",
+  },
+  formcontainer: {
+    backgroundColor: colors.bgCard,
+    height: 800,
+    justifyContent: "space-between",
+  },
+  masjidcontainer: {
+    flex: 0.1,
+  },
+});
 
 export default DakwahForm;

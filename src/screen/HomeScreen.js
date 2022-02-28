@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
+
 import SearchBar from "../components/SearchBar";
 import DakwahListHorizontal from "../components/DakwahListHorizontal";
 import HorizontalList from "../components/HorizontalList";
@@ -17,8 +18,18 @@ import { Context as KajianContext } from "../context/KajianContext";
 import { Context as UstadzContext } from "../context/UstadzContext";
 import { Context as MasjidContext } from "../context/MasjidContext";
 
+import DatePicker from "../components/SmallComponents/DatePicker";
+
 import Spinner from "../components/Spinner";
 const HomeScreen = () => {
+  const [kajian, setKajian] = useState({
+    title: "",
+    date: new Date(),
+    tipe_kajian: "",
+    thematic: "",
+    sylabus: "",
+  });
+
   const results = [
     {
       title: "Dakwah1",
@@ -58,7 +69,7 @@ const HomeScreen = () => {
       name: "Ust Unknown",
       image:
         "https://image.shutterstock.com/image-vector/ustadz-female-moslem-religion-teacher-260nw-1438554200.jpg",
-      id: "3",
+      id: "4",
       date: "2022-02-08 20:00:00",
       thematic: "Thematic4",
       sylabus: "Sylabus4",
@@ -69,7 +80,7 @@ const HomeScreen = () => {
       name: "Ust Unknown",
       image:
         "https://image.shutterstock.com/image-vector/ustadz-female-moslem-religion-teacher-260nw-1438554200.jpg",
-      id: "3",
+      id: "5",
       date: "2022-02-08 20:00:00",
       thematic: "Thematic3",
       sylabus: "Sylabus3",
@@ -80,7 +91,7 @@ const HomeScreen = () => {
       name: "Ust Unknown",
       image:
         "https://image.shutterstock.com/image-vector/ustadz-female-moslem-religion-teacher-260nw-1438554200.jpg",
-      id: "3",
+      id: "6",
       date: "2022-02-08 20:00:00",
       thematic: "Thematic3",
       sylabus: "Sylabus3",
@@ -94,30 +105,35 @@ const HomeScreen = () => {
       name: "Mosque1",
       image:
         "https://t3.ftcdn.net/jpg/02/50/12/70/360_F_250127043_8rncYCl0DJNGwRq9IVL9WrEh7OKKWuXV.jpg",
+      id: 1,
     },
     {
       title: "Mosque1",
       name: "Mosque1",
       image:
         "https://img.theculturetrip.com/wp-content/uploads/2017/11/masjid_dian_al-mahri_di_depok_kubah_emas.jpg",
+      id: 2,
     },
     {
       title: "Mosque1",
       name: "Mosque1",
       image:
         "https://asset.kompas.com/crops/Jnc71A_hCspSRui-CkotnK0Ig6k=/88x0:673x390/750x500/data/photo/2016/10/14/063957520161013-174439780x390.jpg",
+      id: 3,
     },
     {
       title: "Mosque1",
       name: "Mosque1",
       image:
         "https://akcdn.detik.net.id/visual/2018/03/17/f9571aca-a006-477f-abd4-285dce014661_169.jpeg?w=650",
+      id: 4,
     },
     {
       title: "Mosque1",
       name: "Mosque1",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbSCGU6TJ8efnRXGVBpxACPhDYViVw3JpUEw&usqp=CAU",
+      id: 5,
     },
   ];
 
@@ -146,7 +162,20 @@ const HomeScreen = () => {
     <SafeAreaView
       style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
     >
-      <ScrollView style={styles.screenContainer}>
+      <ScrollView
+        style={[styles.screenContainer, { backgroundColor: "white" }]}
+      >
+        <View style={[{ backgroundColor: "white", padding: 10 }]}>
+          <DatePicker
+            date={kajian.date}
+            setDate={(value) =>
+              setKajian({
+                ...kajian,
+                date: value,
+              })
+            }
+          ></DatePicker>
+        </View>
         <DakwahListHorizontal results={results}></DakwahListHorizontal>
         <Title title={"Ustadz Bergabung Bersama Kami"}></Title>
         <HorizontalList results={results}></HorizontalList>

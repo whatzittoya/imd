@@ -26,7 +26,7 @@ const DakwahList = ({ results }) => {
       <FlatList
         data={results}
         horizontal
-        keyExtractor={(result) => result.id}
+        keyExtractor={(result) => result.id.toString()}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity

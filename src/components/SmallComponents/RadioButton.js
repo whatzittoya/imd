@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { RadioButton } from "react-native-paper";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import SubHeader2Text from "../TextComponents/SubHeader2Text";
+import Devider from "./Devider";
 
 const RadioButtonList = (props) => {
   const data = props.data;
@@ -16,23 +18,25 @@ const RadioButtonList = (props) => {
     <View>
       {data.map((row) => {
         return (
-          <>
+          <View key={row}>
             <TouchableOpacity
               style={{ flexDirection: "row", alignContent: "center" }}
               onPress={() => setChecked(row)}
             >
-              <View style={{ flex: 1 }}>
+              <View>
                 <RadioButton
                   value={row}
                   status={checked === row ? "checked" : "unchecked"}
                   onPress={() => setChecked(row)}
                 />
               </View>
-              <View style={{ flex: 4, alignSelf: "center" }}>
-                <Text>{row}</Text>
+              <View style={{ flex: 1, alignSelf: "center" }}>
+                <SubHeader2Text>{row}</SubHeader2Text>
               </View>
             </TouchableOpacity>
-          </>
+
+            <Devider />
+          </View>
         );
       })}
     </View>

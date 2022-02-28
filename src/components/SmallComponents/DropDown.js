@@ -1,29 +1,91 @@
 //import usestate
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import styles from "../../style/global";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Modal,
+  FlatList,
+} from "react-native";
 
-const Dropdown = (props) => {
-  const data = props.data;
-  const handleChange = props.handleChange;
+import Constants from "expo-constants";
+import SubHeaderText from "../TextComponents/SubHeaderText";
+import Screen from "./Screen";
+import PickerItemComponents from "./PickerItemComponents";
 
-  const [selected, setSelected] = useState(data[0]);
+import { BlurView } from "expo-blur";
+import colors from "../../style/colors";
+import InputText from "../Forms/InputForms/InputText";
+
+const Dropdown = ({ data, handleChange, numberOfColumns = 1, placeholder }) => {
+  const datas = data;
+  const handleChange = handleChange;
+
+  const [selected, setSelected] = useState(datas[0]);
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     handleChange(selected);
   }, [selected]);
 
   return (
-    <View style={styles.picker}>
-      <Picker
-        selectedValue={selected}
-        onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
-      >
-        {data.map((row) => {
-          return <Picker.Item label={row} value={row} />;
-        })}
-      </Picker>
+    <View>
+      <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+        <View>
+          {selected ? (
+            <InputText
+              value={selected}
+              icon="angle-double-down"
+              editable={false}
+              placeholdertxt={placeholder}
+            />
+          ) : (
+            <SubHeaderText label="klik disini" />
+          )}
+        </View>
+      </TouchableWithoutFeedback>
+
+      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+        <BlurView intensity={100} tint="dark" style={styles.blurContainer}>
+          <View
+            style={{
+              height: "40%",
+              padding: 20,
+              borderTopStartRadius: 20,
+              borderTopRightRadius: 20,
+              backgroundColor: colors.bgCard,
+            }}
+          >
+            <Screen>
+              <FlatList
+                data={datas}
+                keyExtractor={(item) => item.toString()}
+                numColumns={numberOfColumns}
+                renderItem={({ item }) => (
+                  <PickerItemComponents
+                    label={item}
+                    selected={selected}
+                    onPress={() => {
+                      setModalVisible(false);
+                      setSelected(item);
+                    }}
+                  />
+                )}
+              ></FlatList>
+            </Screen>
+          </View>
+        </BlurView>
+      </Modal>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  blurContainer: {
+    paddingTop: Constants.statusBarHeight,
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+});
+
 export default Dropdown;

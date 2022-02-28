@@ -18,7 +18,7 @@ const HorizontalList = ({ results }) => {
     <View style={styles.container}>
       <FlatList
         data={results}
-        keyExtractor={(result) => result.id}
+        keyExtractor={(result) => result.id.toString()}
         horizontal
         renderItem={({ item }) => {
           return (
