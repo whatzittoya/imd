@@ -3,11 +3,11 @@ import { View, StyleSheet } from "react-native";
 import DatePicker from "./../../SmallComponents/DatePicker";
 import SubHeaderText from "../../TextComponents/SubHeaderText";
 
-function AppInputCalendarText({ title, date, setDate, ...otherProps }) {
+function AppInputCalendarText({ title, value, onChangeText, ...otherProps }) {
   return (
     <View style={styles.container}>
       <SubHeaderText label={title} />
-      <DatePicker date={date} setDate={setDate} {...otherProps} />
+      <DatePicker value={value} setDate={onChangeText} {...otherProps} />
     </View>
   );
 }

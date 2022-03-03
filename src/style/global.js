@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   content: {
     backgroundColor: "#fff",
     flexDirection: "row",
+    alignItems: "center",
   },
   list: {
     backgroundColor: "#F6F6F6",

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-function WordText(props) {
+function WordText({ children }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.txtStyles}>Word</Text>
+      <Text style={styles.txtStyles}>{children}</Text>
     </View>
   );
 }

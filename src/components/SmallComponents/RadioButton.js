@@ -1,37 +1,39 @@
 //import usestate
 import { useState, useEffect } from "react";
 import { RadioButton } from "react-native-paper";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import SubHeader2Text from "../TextComponents/SubHeader2Text";
 import Devider from "./Devider";
 
 const RadioButtonList = (props) => {
-  const data = props.data;
+  const data = props.items;
+  const selectedItem = props.selectedItem;
   const handleChange = props.handleChange;
 
-  const [checked, setChecked] = useState(data[0]);
+  const [checked, setChecked] = useState(selectedItem);
+
   useEffect(() => {
     handleChange(checked);
   }, [checked]);
 
   return (
     <View>
-      {data.map((row) => {
+      {data.map((item) => {
         return (
-          <View key={row}>
+          <View key={item}>
             <TouchableOpacity
               style={{ flexDirection: "row", alignContent: "center" }}
-              onPress={() => setChecked(row)}
+              onPress={() => setChecked(item)}
             >
               <View>
                 <RadioButton
-                  value={row}
-                  status={checked === row ? "checked" : "unchecked"}
-                  onPress={() => setChecked(row)}
+                  value={item}
+                  status={checked === item ? "checked" : "unchecked"}
+                  onPress={() => setChecked(item)}
                 />
               </View>
               <View style={{ flex: 1, alignSelf: "center" }}>
-                <SubHeader2Text>{row}</SubHeader2Text>
+                <SubHeader2Text>{item}</SubHeader2Text>
               </View>
             </TouchableOpacity>
 

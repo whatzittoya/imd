@@ -10,8 +10,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Moment from "moment";
 import InputText from "../Forms/InputForms/InputText";
 
-const DatePicker = ({ date, setDate, ...otherProps }) => {
-  const [dates, setDates] = useState(Moment(date).format("DD-MMM-yyyy HH:mm"));
+const DatePicker = ({ value, setDate, ...otherProps }) => {
+  const [dates, setDates] = useState(Moment(value).format("DD-MMM-yyyy HH:mm"));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
@@ -33,7 +33,6 @@ const DatePicker = ({ date, setDate, ...otherProps }) => {
   };
 
   const openDatePicker = () => {
-    //console.log("oke");
     showMode("date");
   };
 
@@ -52,7 +51,7 @@ const DatePicker = ({ date, setDate, ...otherProps }) => {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={value}
           mode={mode}
           is24Hour={true}
           display="default"

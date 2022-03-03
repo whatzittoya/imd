@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import colors from "../../style/colors";
+import fontStyle from "../../style/fontStyle";
 
 function SubHeaderText({ label, typecolors = "activetxt" }) {
   return (
@@ -15,7 +16,7 @@ function SubHeaderText({ label, typecolors = "activetxt" }) {
 const styles = StyleSheet.create({
   container: {},
   txtStyles: {
-    fontFamily: "Inter",
+    fontFamily: fontStyle.medium,
     fontStyle: "normal",
     fontWeight: "500",
     fontSize: 14,

@@ -3,11 +3,15 @@ import { View, StyleSheet } from "react-native";
 import RadioButtonList from "../../SmallComponents/RadioButton";
 import SubHeaderText from "../../TextComponents/SubHeaderText";
 
-function AppRadioButton({ title, data, handleChange }) {
+function AppRadioButton({ title, items, selectedItem, handleChange }) {
   return (
     <View style={styles.container}>
       <SubHeaderText label={title} />
-      <RadioButtonList data={data} handleChange={handleChange} />
+      <RadioButtonList
+        items={items}
+        handleChange={handleChange}
+        selectedItem={selectedItem}
+      />
     </View>
   );
 }

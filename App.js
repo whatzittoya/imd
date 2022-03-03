@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import { NavigationContainer } from "@react-navigation/native";
 import StacksRoute from "./src/navigation";

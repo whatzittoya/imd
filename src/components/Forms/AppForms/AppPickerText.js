@@ -3,11 +3,26 @@ import { View, StyleSheet } from "react-native";
 import Dropdown from "../../SmallComponents/DropDown";
 import SubHeaderText from "../../TextComponents/SubHeaderText";
 
-function AppPickerText({ title, data, handleChange, ...otherProps }) {
+function AppPickerText({
+  title,
+  items,
+  onSelectItem,
+  numberOfColumn = 1,
+  selectedItem,
+  placeholder,
+  ...otherProps
+}) {
   return (
     <View style={styles.container}>
       <SubHeaderText label={title} />
-      <Dropdown data={data} handleChange={handleChange} {...otherProps} />
+      <Dropdown
+        data={items}
+        onSelectItem={onSelectItem}
+        numberOfColumn={numberOfColumn}
+        placeholder={placeholder}
+        selectedItem={selectedItem}
+        {...otherProps}
+      />
     </View>
   );
 }

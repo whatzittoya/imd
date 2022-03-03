@@ -1,18 +1,13 @@
 //import react native
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  TouchableOpacity,
-  FlatList,
-  Image,
-} from "react-native";
-//import usestate and useeffect
-import { useState, useEffect } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
+
 import EmptyDisplay from "./EmptyDisplay";
+
 import styles from "../style/global";
-import { Feather } from "@expo/vector-icons";
+
+import EventCard from "./Content/EventCard";
+import HorizontalSeparator from "./Content/HorizontalSeparator";
+
 const DakwahList = ({ results }) => {
   const refresh = () => {
     console.log("refresh");
@@ -27,35 +22,15 @@ const DakwahList = ({ results }) => {
         data={results}
         horizontal
         keyExtractor={(result) => result.id.toString()}
+        ItemSeparatorComponent={HorizontalSeparator}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              onPress={() => {
-                console.log(item.title);
-              }}
-            >
-              <View style={[styles.content, stylesLocal.content]}>
-                <Image style={stylesLocal.image} source={{ uri: item.image }} />
-                <View style={stylesLocal.textContainer}>
-                  <View style={stylesLocal.titleContainer}>
-                    <Text style={stylesLocal.title}>{item.title}</Text>
-                  </View>
-
-                  <Text style={stylesLocal.secondary}>{item.thematic}</Text>
-                  <Text style={stylesLocal.secondary}>{item.sylabus}</Text>
-                  <Text style={stylesLocal.secondary}>{item.masjid}</Text>
-                  <Text style={stylesLocal.date}>
-                    <Feather
-                      name="calendar"
-                      size={15}
-                      color="#828282"
-                      style={{ marginLeft: 1 }}
-                    />
-                    {item.date}
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
+            <EventCard
+              item={item}
+              onPress={() => console.log(item.title)}
+              thumbnailUrl={item.image}
+              imageUrl={item.image}
+            />
           );
         }}
       ></FlatList>

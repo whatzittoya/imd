@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import fontStyle from "../../style/fontStyle";
 
-function Header2Text(props) {
+function Header2Text({ children }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.txtStyles}>Header Test 2</Text>
+      <Text style={[styles.txtStyles]}>{children}</Text>
     </View>
   );
 }
@@ -12,7 +13,7 @@ function Header2Text(props) {
 const styles = StyleSheet.create({
   container: {},
   txtStyles: {
-    fontFamily: "Inter",
+    fontFamily: fontStyle.bold,
     fontStyle: "normal",
     fontWeight: "500",
     fontSize: 16,
