@@ -1,16 +1,20 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View, SafeAreaView, ScrollView } from "react-native";
+import { View, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 
 import SearchBar from "../components/SearchBar";
 import DakwahListHorizontal from "../components/DakwahListHorizontal";
 import HorizontalList from "../components/HorizontalList";
 import Title from "../components/SmallComponents/Title";
-import styles from "../style/global";
+import stylesglobal from "../style/global";
 import { Context as KajianContext } from "../context/KajianContext";
 import { Context as UstadzContext } from "../context/UstadzContext";
 import { Context as MasjidContext } from "../context/MasjidContext";
 
 import Spinner from "../components/Spinner";
+import Button from "../components/SmallComponents/Button";
+import TitleContent from "../components/Content/TitleContent";
+import EventCard from "../components/Content/EventCard";
+import UstadCard from "./../components/Content/UstadCard";
 
 const results = [
   {
@@ -161,15 +165,25 @@ const HomeScreen = () => {
       style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
     >
       <ScrollView
-        style={[styles.screenContainer, { backgroundColor: "white" }]}
+        style={[stylesglobal.screenContainer, { backgroundColor: "white" }]}
       >
-        <Title title={"Ustadz Bergabung Bersama Kami"}></Title>
-        <DakwahListHorizontal results={results}></DakwahListHorizontal>
+        <TitleContent
+          title="Jadwal Pengajian"
+          results={results}
+          ItemComponent={EventCard}
+        />
 
-        <Title title={"Ustadz Bergabung Bersama Kami"}></Title>
-        <HorizontalList results={results}></HorizontalList>
-        <Title title="Masjid Bergabung Bersama Kami"></Title>
-        <HorizontalList results={resultsMosque}></HorizontalList>
+        <TitleContent
+          title="Ustadz Kita"
+          results={results}
+          ItemComponent={UstadCard}
+        />
+
+        <TitleContent
+          title="Masjid Bersama Kita"
+          results={resultsMosque}
+          ItemComponent={UstadCard}
+        />
       </ScrollView>
       {loading && <Spinner></Spinner>}
     </SafeAreaView>

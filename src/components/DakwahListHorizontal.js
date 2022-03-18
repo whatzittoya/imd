@@ -6,9 +6,10 @@ import EmptyDisplay from "./EmptyDisplay";
 import styles from "../style/global";
 
 import EventCard from "./Content/EventCard";
+
 import HorizontalSeparator from "./Content/HorizontalSeparator";
 
-const DakwahList = ({ results }) => {
+const DakwahList = ({ results, ItemComponent = Event }) => {
   const refresh = () => {
     console.log("refresh");
   };
@@ -25,7 +26,7 @@ const DakwahList = ({ results }) => {
         ItemSeparatorComponent={HorizontalSeparator}
         renderItem={({ item }) => {
           return (
-            <EventCard
+            <ItemComponent
               item={item}
               onPress={() => console.log(item.title)}
               thumbnailUrl={item.image}
